@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import styled from 'styled-components';
 import Person from './Person/Person';
 import PersonIn from './Person/PersonIn';
+
+const StyledButton = styled.button`
+      background-color:{props => props.alt ? red : green};
+      font: inherit;
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+
+      &:hover {
+        backgroundColor:{props => props.alt ? red : salmon};
+        color:black;
+      }
+
+`;
+
 
 class App extends Component {
   state = {
@@ -63,17 +78,7 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor:'green',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover':{
-        backgroundColor:'lightgreen',
-        color:'black'
-      }
-    };
+
 
     let person = null;
 
@@ -90,11 +95,12 @@ class App extends Component {
         })}
         </div>
      )
-    style.backgroundColor='red';
-    style[':hover']={
-      backgroundColor:'blue',
-      color:'black'
-    }
+
+    // style.backgroundColor='red';
+    // style[':hover']={
+    //   backgroundColor:'blue',
+    //   color:'black'
+    // }
 
     }
 
@@ -122,9 +128,8 @@ class App extends Component {
     return (
       <div className="App">
         <h1 className={class1}>Im working on reactjs</h1>
-        <button
-         style ={style}
-         onClick={this.togglePersonHandler}>Toggle Persons</button>
+        <StyledButton alt={this.state.showPersons}
+         onClick={this.togglePersonHandler}>Toggle Persons</StyledButton>
         {person}
 
       </div>
@@ -132,4 +137,4 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+export default App;
