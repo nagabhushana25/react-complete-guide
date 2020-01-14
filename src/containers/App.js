@@ -1,22 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import styled from 'styled-components';
-import Person from './Person/Person';
-import PersonIn from './Person/PersonIn';
-
-const StyledButton = styled.button`
-      background-color:{props => props.alt ? red : green};
-      font: inherit;
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-
-      &:hover {
-        backgroundColor:{props => props.alt ? red : salmon};
-        color:black;
-      }
-
-`;
+import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockfit/Cockfit'
+//import PersonIn from '../Components/Persons/Person/PersonIn';
 
 
 class App extends Component {
@@ -84,17 +70,12 @@ class App extends Component {
 
     if (this.state.showPersons) {
       person = (
-        <div>
-        {this.state.persons.map((per,index) => {
-          return <Person
-            click = {() => this.deletePersonHandler(index)}
-            name={per.name}
-            age={per.age}
-            key={per.id}
-            changed={(event) => this.nameChangehandler(event,per.id)} />
-        })}
-        </div>
-     )
+        <Persons
+          persons = {this.state.persons}
+          clicked = {this.deletePersonHandler}
+          changed = {this.nameChangehandler}
+        />
+     );
 
     // style.backgroundColor='red';
     // style[':hover']={
@@ -104,7 +85,7 @@ class App extends Component {
 
     }
 
-    const class1='cls';
+
 
 
 
@@ -127,11 +108,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1 className={class1}>Im working on reactjs</h1>
-        <StyledButton alt={this.state.showPersons}
-         onClick={this.togglePersonHandler}>Toggle Persons</StyledButton>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonHandler}
+         />
         {person}
-
       </div>
     );
   }
